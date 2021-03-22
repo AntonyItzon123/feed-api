@@ -28,9 +28,7 @@ import {FeedRouter} from './controllers/feed.router'
     origin: config.url,
   }));
 
-  app.use('/v0', FeedRouter);
-
-  app.get( "/", async ( req, res ) => { res.send("V0 Feed Api") });
+  app.use('/feed', FeedRouter);
 
   app.get("/health", (req : Request, res : Response) => { res.status(200).send("Hello! Feed Api") });
 

@@ -11,11 +11,16 @@ export const s3 = new AWS.S3({
   region: config.aws_region,
   params: {Bucket: config.aws_media_bucket},
 });
+console.log(`Signed S3 ${s3}`)
+console.log(`Bucket S3 ${config.aws_media_bucket}`)
+console.log(`Region S3 ${config.aws_region}`)
+console.log(`Credentials S3 ${credentials.accessKeyId} ${credentials.secretAccessKey}`)
+
 
 // Generates an AWS signed URL for retrieving objects
 export function getGetSignedUrl( key: string ): string {
   const signedUrlExpireSeconds = 60 * 5;
-
+  console.log(`Signed Url Get ${signedUrlExpireSeconds}`)
   return s3.getSignedUrl('getObject', {
     Bucket: config.aws_media_bucket,
     Key: key,
@@ -26,7 +31,7 @@ export function getGetSignedUrl( key: string ): string {
 // Generates an AWS signed URL for uploading objects
 export function getPutSignedUrl( key: string ): string {
   const signedUrlExpireSeconds = 60 * 5;
-
+  console.log(`Signed Url Put ${signedUrlExpireSeconds}`)
   return s3.getSignedUrl('putObject', {
     Bucket: config.aws_media_bucket,
     Key: key,
